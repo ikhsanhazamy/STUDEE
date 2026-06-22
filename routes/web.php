@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Task;
+use App\Http\Controllers\AiChatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -233,4 +234,8 @@ Route::middleware('auth')->group(function () {
         abort_if($task->user_id !== Auth::id(), 403);
         return view('tasks.timer', compact('task'));
     })->name('tasks.timer');
+
+    Route::post('/ai/chat', [AiChatController::class, 'ask'])
+        ->middleware('throttle:20,1')
+        ->name('ai.chat');
 });

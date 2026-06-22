@@ -22,6 +22,12 @@ return [
         'key' => env('RESEND_API_KEY'),
     ],
 
+    'huggingface' => [
+        'token' => env('HF_TOKEN'),
+        'model' => env('HF_MODEL', 'google/gemma-2-2b-it'),
+        'base_url' => env('HF_API_BASE_URL', 'https://router.huggingface.co/v1'),
+    ],
+
     'ses' => [
         'key' => env('AWS_ACCESS_KEY_ID'),
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
