@@ -1,5 +1,5 @@
-<footer class="backdrop-blur-xl bg-white/10 border-t border-white/20">
-    <div class="max-w-7xl mx-auto py-5 px-4 sm:px-6 lg:px-8
+<footer class="bg-[#444422]">
+    <div class="mx-auto min-h-[89px] max-w-[1440px] py-5 px-8 lg:px-[48px]
                 flex flex-col sm:flex-row justify-between items-center gap-3">
 
         <p class="text-white/80 text-sm">

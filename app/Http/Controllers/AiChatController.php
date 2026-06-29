@@ -50,7 +50,7 @@ class AiChatController extends Controller
             $response = Http::withToken($token)
                 ->acceptJson()
                 ->timeout(45)
-                ->retry(2, 500)
+                ->retry(2, 500, throw: false)
                 ->post(rtrim(config('services.huggingface.base_url'), '/') . '/chat/completions', [
                     'model' => config('services.huggingface.model'),
                     'messages' => $messages,
@@ -64,8 +64,12 @@ class AiChatController extends Controller
                     'body' => $response->json() ?: $response->body(),
                 ]);
 
+                $providerMessage = data_get($response->json(), 'error.message');
+
                 return response()->json([
-                    'message' => 'AI sedang tidak bisa menjawab. Coba lagi beberapa saat.',
+                    'message' => $providerMessage
+                        ? 'Hugging Face: ' . $providerMessage
+                        : 'AI sedang tidak bisa menjawab. Coba lagi beberapa saat.',
                 ], 502);
             }
 
